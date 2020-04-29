@@ -7,24 +7,37 @@ use std::io::BufReader;
 use std::str::FromStr;
 
 fn main() {
-    let file_input: Vec<String> = read_by_line("eff_large_wordlist.txt").unwrap();
+    let eff_words = make_list("eff_large_wordlist.txt");
+    println!("Some randomly generated usernames are:\n");
+    for _count in 1..=10 {
+        let rand_number_as_string: String = rand::thread_rng().gen_range(0, 999).to_string();
+
+        println!(
+            "{}_{}{}",
+            get_random_word(&eff_words),
+            get_random_word(&eff_words),
+            &rand_number_as_string
+        );
+    }
+}
+
+fn make_list(file_path: &str) -> Vec<String> {
+    let file_input: Vec<String> = match read_by_line(file_path) {
+        Ok(r) => r,
+        Err(e) => panic!("Error: {}", e),
+    };
     let mut eff_words: Vec<String> = vec![];
     for line in file_input {
         let this_word: String = line.split_whitespace().collect::<Vec<&str>>()[1].to_string();
         eff_words.push(this_word);
     }
-    println!("Five random usernames are:");
-    for _count in 1..=5 {
-        let first_word_of_username = eff_words.choose(&mut rand::thread_rng());
-        let second_word_of_username = eff_words.choose(&mut rand::thread_rng());
-        let rand_number_as_string: String = rand::thread_rng().gen_range(0, 999).to_string();
+    eff_words
+}
 
-        println!(
-            "{}_{}{}",
-            first_word_of_username.unwrap(),
-            second_word_of_username.unwrap(),
-            &rand_number_as_string
-        );
+fn get_random_word(eff_words: &[String]) -> String {
+    match eff_words.choose(&mut rand::thread_rng()) {
+        Some(word) => word.to_string(),
+        None => panic!("Couldn't pick a random EFF word"),
     }
 }
 
