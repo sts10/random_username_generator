@@ -8,23 +8,24 @@ use std::str::FromStr;
 
 fn main() {
     let file_input: Vec<String> = read_by_line("eff_large_wordlist.txt").unwrap();
-    println!("First element from file is {:?}", file_input[0]);
     let mut eff_words: Vec<String> = vec![];
     for line in file_input {
         let this_word: String = line.split_whitespace().collect::<Vec<&str>>()[1].to_string();
         eff_words.push(this_word);
     }
-    let first_word_of_username = eff_words.choose(&mut rand::thread_rng());
-    let second_word_of_username = eff_words.choose(&mut rand::thread_rng());
-    let rand_number: usize = rand::thread_rng().gen_range(0, 999);
-    let rand_number_as_string: String = rand_number.to_string();
+    println!("Five random usernames are:");
+    for _count in 1..=5 {
+        let first_word_of_username = eff_words.choose(&mut rand::thread_rng());
+        let second_word_of_username = eff_words.choose(&mut rand::thread_rng());
+        let rand_number_as_string: String = rand::thread_rng().gen_range(0, 999).to_string();
 
-    println!(
-        "Your random username is \n{}_{}{}",
-        first_word_of_username.unwrap(),
-        second_word_of_username.unwrap(),
-        &rand_number_as_string
-    );
+        println!(
+            "{}_{}{}",
+            first_word_of_username.unwrap(),
+            second_word_of_username.unwrap(),
+            &rand_number_as_string
+        );
+    }
 }
 
 fn read_by_line<T: FromStr>(file_path: &str) -> io::Result<Vec<T>> {
