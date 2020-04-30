@@ -7,7 +7,7 @@ use std::io::BufReader;
 use std::str::FromStr;
 
 fn main() {
-    let eff_words = make_list("eff_large_wordlist.txt");
+    let eff_words = make_list("word-lists/agile_words.txt");
     println!("Some randomly generated usernames are:\n");
     for _count in 1..=10 {
         let rand_number_as_string: String = rand::thread_rng().gen_range(0, 999).to_string();
@@ -29,8 +29,7 @@ fn make_list(file_path: &str) -> Vec<String> {
     };
     let mut eff_words: Vec<String> = vec![];
     for line in file_input {
-        let this_word: String = line.split_whitespace().collect::<Vec<&str>>()[1].to_string();
-        eff_words.push(this_word);
+        eff_words.push(line);
     }
     eff_words
 }
@@ -45,7 +44,7 @@ fn get_random_word(eff_words: &[String]) -> String {
 fn get_random_combiner() -> String {
     match vec!["", "_", "-"].choose(&mut rand::thread_rng()) {
         Some(combiner) => (*combiner).to_string(),
-        None => " ".to_string(),
+        None => "".to_string(),
     }
 }
 
