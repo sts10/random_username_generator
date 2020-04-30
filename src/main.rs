@@ -13,8 +13,9 @@ fn main() {
         let rand_number_as_string: String = rand::thread_rng().gen_range(0, 999).to_string();
 
         println!(
-            "{}_{}{}",
+            "{}{}{}{}",
             get_random_word(&eff_words),
+            get_random_combiner(),
             get_random_word(&eff_words),
             &rand_number_as_string
         );
@@ -38,6 +39,13 @@ fn get_random_word(eff_words: &[String]) -> String {
     match eff_words.choose(&mut rand::thread_rng()) {
         Some(word) => word.to_string(),
         None => panic!("Couldn't pick a random EFF word"),
+    }
+}
+
+fn get_random_combiner() -> String {
+    match vec!["", "_", "-"].choose(&mut rand::thread_rng()) {
+        Some(combiner) => (*combiner).to_string(),
+        None => " ".to_string(),
     }
 }
 
