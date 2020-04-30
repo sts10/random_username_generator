@@ -18,3 +18,11 @@ bethesdatoad905
 athenian_amuse850
 ermine-forging601
 ```
+
+## Usage
+
+1. Clone down the repo
+2. Have Rust installed
+3. Run `cargo run` or `cargo run --release`
+
+As is, the word list the program uses is from 1Password. The EFF long list is included as well.
