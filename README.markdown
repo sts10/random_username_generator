@@ -25,4 +25,6 @@ ermine-forging601
 2. Have Rust installed
 3. Run `cargo run` or `cargo run --release`
 
-As is, the word list the program uses is from 1Password. The EFF long list is included as well.
+## On the words used
+
+As is, the word list the program uses is adapted from [an AgileBits word list](https://github.com/agilebits/crackme/blob/master/doc/AgileWords.txt). The [EFF long word list](https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt) is included in the repo as well for your convenience.
