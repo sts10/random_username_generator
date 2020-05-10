@@ -7,17 +7,15 @@ use std::io::BufReader;
 use std::str::FromStr;
 
 fn main() {
-    let eff_words = make_list("word-lists/agile_words.txt");
+    let word_list = make_list("word-lists/agile_words.txt");
     println!("Some randomly generated usernames are:\n");
     for _count in 1..=10 {
-        let rand_number_as_string: String = rand::thread_rng().gen_range(0, 999).to_string();
-
         println!(
             "{}{}{}{}",
-            get_random_word(&eff_words),
-            get_random_combiner(),
-            get_random_word(&eff_words),
-            &rand_number_as_string
+            get_random_element(&word_list),
+            get_random_element(&["_".to_string(), "-".to_string(), "".to_string()]),
+            get_random_element(&word_list),
+            rand::thread_rng().gen_range(0, 999)
         );
     }
 }
@@ -25,30 +23,26 @@ fn main() {
 fn make_list(file_path: &str) -> Vec<String> {
     let file_input: Vec<String> = match read_by_line(file_path) {
         Ok(r) => r,
-        Err(e) => panic!("Error: {}", e),
+        Err(e) => panic!("Error reading word list file: {}", e),
     };
-    let mut eff_words: Vec<String> = vec![];
+    let mut word_list: Vec<String> = vec![];
     for line in file_input {
-        eff_words.push(line);
+        word_list.push(line);
     }
-    eff_words
+    word_list
 }
 
-fn get_random_word(eff_words: &[String]) -> String {
-    match eff_words.choose(&mut rand::thread_rng()) {
+fn get_random_element(word_list: &[String]) -> String {
+    match word_list.choose(&mut rand::thread_rng()) {
         Some(word) => word.to_string(),
-        None => panic!("Couldn't pick a random EFF word"),
+        None => panic!("Couldn't pick a random word"),
     }
 }
 
-fn get_random_combiner() -> String {
-    match vec!["", "_", "-"].choose(&mut rand::thread_rng()) {
-        Some(combiner) => (*combiner).to_string(),
-        None => "".to_string(),
-    }
-}
-
-fn read_by_line<T: FromStr>(file_path: &str) -> io::Result<Vec<T>> {
+fn read_by_line<T: FromStr>(file_path: &str) -> io::Result<Vec<T>>
+where
+    <T as std::str::FromStr>::Err: std::fmt::Debug,
+{
     let mut vec = Vec::new();
     let f = match File::open(file_path.trim_matches(|c| c == '\'' || c == ' ')) {
         Ok(res) => res,
@@ -58,10 +52,7 @@ fn read_by_line<T: FromStr>(file_path: &str) -> io::Result<Vec<T>> {
     for line in file.lines() {
         match line?.parse() {
             Ok(l) => vec.push(l),
-            Err(_e) => {
-                eprintln!("Error");
-                continue;
-            }
+            Err(e) => panic!("Error parsing line from file: {:?}", e),
         }
     }
     Ok(vec)
