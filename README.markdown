@@ -5,6 +5,8 @@ Generates a random username from a given word list.
 ## Example
 
 ```text
+> rug
+
 Some randomly generated usernames are:
 
 flyleaf-therapy41
