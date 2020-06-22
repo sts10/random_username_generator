@@ -25,6 +25,8 @@ ermine-forging601
 2. Have Rust installed
 3. Run `cargo run` or `cargo run --release`
 
+The executable is `rug`, so if you run `cargo install --path .` you'd be able to use `rug` to run the program.
+
 ## On the words used
 
 As is, the word list the program uses is adapted from [an AgileBits word list](https://github.com/agilebits/crackme/blob/master/doc/AgileWords.txt). The [EFF long word list](https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt) is included in the repo as well for your convenience.
