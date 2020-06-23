@@ -71,7 +71,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "random_username_generator"
+name = "rug"
 version = "0.1.0"
 dependencies = [
  "rand",

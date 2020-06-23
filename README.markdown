@@ -5,8 +5,6 @@ Generates a random username from a given word list.
 ## Example
 
 ```text
-> rug
-
 Some randomly generated usernames are:
 
 flyleaf-therapy41
@@ -26,8 +24,6 @@ ermine-forging601
 1. Clone down the repo
 2. Have Rust installed
 3. Run `cargo run` or `cargo run --release`
-
-The executable is `rug`, so if you run `cargo install --path .` you'd be able to use `rug` to run the program.
 
 ## On the words used
 
