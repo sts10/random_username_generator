@@ -1,3 +1,5 @@
+**NOTE**: An updated version of this program exists [here](https://github.com/sts10/rug): `https://github.com/sts10/rug`
+
 # RUG (Random Username Generator)
 
 Generates a random username from a given word list.
